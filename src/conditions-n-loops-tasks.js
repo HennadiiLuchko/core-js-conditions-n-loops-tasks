@@ -65,8 +65,11 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x || queen.y === king.y) {
+    return true;
+  }
+  return Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y);
 }
 
 /**
@@ -108,8 +111,29 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  if (num < 1) {
+    return '';
+  }
+  if (num >= 40) {
+    return `XL${convertToRomanNumerals(num - 40)}`;
+  }
+  if (num >= 10) {
+    return `X${convertToRomanNumerals(num - 10)}`;
+  }
+  if (num >= 9) {
+    return `IX${convertToRomanNumerals(num - 9)}`;
+  }
+  if (num >= 5) {
+    return `V${convertToRomanNumerals(num - 5)}`;
+  }
+  if (num >= 4) {
+    return `IV${convertToRomanNumerals(num - 4)}`;
+  }
+  if (num >= 1) {
+    return `I${convertToRomanNumerals(num - 1)}`;
+  }
+  return '';
 }
 
 /**
@@ -356,8 +380,24 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let res = str;
+  for (let i = 0; i < iterations; i += 1) {
+    let resOdd = '';
+    let resEven = '';
+    for (let j = 0; j < res.length; j += 1) {
+      if (j % 2 === 0) {
+        resEven += res[j];
+      } else {
+        resOdd += res[j];
+      }
+    }
+    res = resEven + resOdd;
+    if (res === str) {
+      return shuffleChar(str, iterations % (i + 1));
+    }
+  }
+  return res;
 }
 
 /**
