@@ -421,7 +421,7 @@ function getNearestBigger(number) {
   const arr = [...`${number}`];
 
   let i = arr.length - 1;
-  while (i > 0 && arr[i - 1] >= arr[i]) i += 1;
+  while (i > 0 && arr[i - 1] >= arr[i]) i -= 1;
   if (i <= 0) return false;
 
   let j = arr.length - 1;
@@ -438,7 +438,7 @@ function getNearestBigger(number) {
     i += 1;
     j -= 1;
   }
-  return Number(arr.join(''));
+  return +arr.join('') || number;
 }
 
 module.exports = {
