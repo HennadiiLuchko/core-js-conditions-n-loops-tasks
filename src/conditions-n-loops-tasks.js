@@ -322,8 +322,42 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const res = [];
+  for (let i = 0; i < size; i += 1) {
+    res[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      res[i][j] = null;
+    }
+  }
+  let colStart = 0;
+  let colEnd = size - 1;
+  let rowStart = 0;
+  let rowEnd = size - 1;
+  let value = 1;
+  while (colStart <= colEnd && rowStart <= rowEnd) {
+    for (let i = colStart; i <= colEnd; i += 1) {
+      res[rowStart][i] = value;
+      value += 1;
+    }
+    rowStart += 1;
+    for (let i = rowStart; i <= rowEnd; i += 1) {
+      res[i][colEnd] = value;
+      value += 1;
+    }
+    colEnd -= 1;
+    for (let i = colEnd; i >= colStart; i -= 1) {
+      res[rowEnd][i] = value;
+      value += 1;
+    }
+    rowEnd -= 1;
+    for (let i = rowEnd; i >= rowStart; i -= 1) {
+      res[i][colStart] = value;
+      value += 1;
+    }
+    colStart += 1;
+  }
+  return res;
 }
 
 /**
@@ -370,8 +404,20 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const res = arr;
+  if (res.length < 2) return res;
+
+  for (let i = 0; i < res.length - 1; i += 1) {
+    let index = i;
+    for (let j = i + 1; j < res.length; j += 1) {
+      if (res[j] < res[index]) index = j;
+    }
+    const mediator = res[i];
+    res[i] = res[index];
+    res[index] = mediator;
+  }
+  return res;
 }
 
 /**
